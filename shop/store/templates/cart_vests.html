@@ -1,0 +1,59 @@
+{% load static %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Корзина бронежилетов</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="container mt-4">
+<h1>Корзина бронежилетов</h1>
+
+{% if items %}
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Фото</th>
+            <th>Модель</th>
+            <th>Защита</th>
+            <th>Вес</th>
+            <th>Цена</th>
+            <th>Действие</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>
+                {% if item.image %}
+                <img src="{{ product.image.url }}" alt="{{ product.designation }}" width="150">
+                {% endif %}
+            </td>
+            <td>{{ item.model }}</td>
+            <td>{{ item.protection_level }}</td>
+            <td>{{ item.weight }} кг</td>
+            <td>{{ item.price }} грн</td>
+            <td>
+                <form action="{% url 'remove_vest_from_cart' item.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm">❌ Удалить</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<p><strong>Итого: {{ total }} грн</strong></p>
+
+<form action="{% url 'checkout_vests' %}" method="post">
+    {% csrf_token %}
+    <button type="submit" class="btn btn-success">🛒 Оформить заказ</button>
+</form>
+
+{% else %}
+<p>Корзина пуста.</p>
+{% endif %}
+
+</body>
+</html>

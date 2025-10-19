@@ -1,0 +1,198 @@
+/* Базовая палитра (с оттенками койот) */
+:root {
+    --bg-dark: #121212;
+    --bg-panel: #1f1f1f;
+    --bg-highlight: #292929;
+    --border-color: #3b3b3b;
+    --text-primary: #e0e0e0;
+    --text-secondary: #999;
+    --accent: #b98c4d; /* койот */
+    --accent-hover: #d0a05a; /* светлее койот */
+    --accent-border: #8a6939;
+    --shadow-dark: rgba(0, 0, 0, 0.8);
+}
+
+/* Общий стиль */
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    font-family: "Roboto", "Segoe UI", Tahoma, Geneva, sans-serif;
+    font-size: 15.5px;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Контейнер — центрирование */
+.container {
+    max-width: 1080px;
+    margin: 50px auto;
+    padding: 32px 40px;
+    background-color: var(--bg-panel);
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 0 20px var(--shadow-dark);
+    text-align: center; /* Центрируем текст */
+}
+
+/* Заголовки */
+h1, h2, h3, h4 {
+    color: #ffffff;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-left: 5px solid var(--accent);
+    padding-left: 14px;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.06em;
+    user-select: none;
+}
+
+/* Кнопки — койот */
+button,
+input[type="submit"],
+a.button {
+    background-color: var(--accent);
+    color: #1c1c1c;
+    border: 2.5px solid var(--accent-border);
+    padding: 12px 26px;
+    border-radius: 8px;
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 1.2px;
+    cursor: pointer;
+    transition:
+        background-color 0.25s ease,
+        transform 0.15s ease,
+        box-shadow 0.25s ease;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: inset 0 0 6px rgba(255 255 255 / 0.07);
+    user-select: none;
+}
+
+button:hover,
+input[type="submit"]:hover,
+a.button:hover {
+    background-color: var(--accent-hover);
+    box-shadow: 0 0 12px var(--accent-hover);
+    transform: scale(1.05);
+}
+
+button:active,
+input[type="submit"]:active,
+a.button:active {
+    transform: scale(0.95);
+    box-shadow: none;
+}
+
+/* Поля ввода */
+input, select, textarea {
+    background-color: #2c2c2c;
+    color: var(--text-primary);
+    border: 1.5px solid var(--border-color);
+    border-radius: 8px;
+    padding: 12px 16px;
+    font-size: 15.5px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+    letter-spacing: 0.02em;
+}
+
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    background-color: #333333;
+    box-shadow: 0 0 10px var(--accent);
+    color: #fff;
+}
+
+/* Ссылки */
+a {
+    color: var(--accent);
+    text-decoration: none;
+    transition: color 0.25s ease;
+}
+
+a:hover,
+a:focus {
+    color: var(--accent-hover);
+    text-decoration: underline;
+    outline: none;
+}
+
+/* Карточки товара */
+.product-card {
+    background-color: var(--bg-highlight);
+    border: 1.5px solid var(--border-color);
+    border-left: 6px solid var(--accent);
+    padding: 22px 24px;
+    margin-bottom: 24px;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.6);
+    transition: box-shadow 0.3s ease;
+    justify-content: center;
+    align-items: center;
+}
+
+.product-card:hover {
+    box-shadow: 0 6px 20px var(--accent-hover);
+}
+
+.product-card img {
+    width: 180px;
+    height: auto;
+    border-radius: 8px;
+    border: 1.8px solid #333;
+    object-fit: contain;
+    user-select: none;
+    pointer-events: none;
+}
+
+/* Кнопка описания */
+.btn-description {
+    background-color: transparent;
+    border: 1.8px solid var(--accent);
+    color: var(--accent);
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 700;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-transform: uppercase;
+    user-select: none;
+}
+
+.btn-description:hover {
+    background-color: var(--accent);
+    color: #1c1c1c;
+    box-shadow: 0 0 12px var(--accent-hover);
+    transform: scale(1.05);
+}
+
+/* Центровка карточек и адаптив */
+@media (max-width: 768px) {
+    .product-card {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    .product-card img {
+        width: 100%;
+        max-width: 280px;
+        margin-bottom: 20px;
+    }
+
+    .product-info {
+        width: 100%;
+    }
+}

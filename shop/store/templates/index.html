@@ -1,0 +1,38 @@
+{% load static %}
+
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главная страница</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body class="container py-4">
+
+    <h1 class="mb-4">Главная страница</h1>
+
+    {% if request.user.is_authenticated %}
+        <p>Привет, {{ request.user.username }} | <a href="{% url 'logout' %}">Выйти</a></p>
+    {% else %}
+        <a href="{% url 'login' %}" class="btn btn-outline-primary me-2">Вход</a>
+        <a href="{% url 'register' %}" class="btn btn-outline-success me-2">Регистрация</a>
+    {% endif %}
+
+    <div class="my-3">
+        <a href="{% url 'about' %}" class="btn btn-secondary me-2">О нас</a>
+        <a href="{% url 'profile' %}" class="btn btn-dark me-2">Профиль</a>
+    </div>
+
+    <div class="my-4">
+        <h4>Патроны</h4>
+        <a href="{% url 'add_product' %}" class="btn btn-outline-light mb-2 me-2">➕ Добавить патроны</a>
+        <a href="{% url 'products' %}" class="btn btn-outline-info mb-2">📦 Посмотреть патроны</a>
+    </div>
+
+    <div class="my-4">
+        <h4>Бронежилеты</h4>
+        <a href="{% url 'add_vest' %}" class="btn btn-outline-light mb-2 me-2">➕ Добавить бронежилет</a>
+        <a href="{% url 'vests' %}" class="btn btn-outline-info mb-2">🛡️ Посмотреть бронежилеты</a>
+    </div>
+
+</body>
+</html>

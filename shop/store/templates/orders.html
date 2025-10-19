@@ -1,0 +1,39 @@
+
+{% load static %}
+{% load custom_filters %}
+ <link rel="stylesheet" href="{% static 'style.css' %}">
+{% block content %}
+<h2>История заказов</h2>
+
+{% for order in orders %}
+  <div class="order">
+    <h3>Заказ №{{ order.id }}</h3>
+    <p>Дата: {{ order.created_at }}</p>
+
+    {% for item in order.items.all %}
+      <div class="order-item" style="margin-left:20px; border:1px solid #ccc; padding:10px; margin-bottom:10px;">
+        {% if item.product %}
+          <p><strong>Товар:</strong> {{ item.product.designation }}</p>
+          {% if item.product.image %}
+            <img src="{{ item.product.image.url }}" alt="{{ item.product.designation }}" style="max-width:150px; border:1px solid #444; border-radius:4px;">
+          {% endif %}
+        {% elif item.vest %}
+          <p><strong>Бронежилет:</strong> {{ item.vest.model }}</p>
+          {% if item.vest.image %}
+            <img src="{{ item.vest.image.url }}" alt="{{ item.vest.model }}" style="max-width:150px; border:1px solid #444; border-radius:4px;">
+          {% endif %}
+        {% endif %}
+
+        <p>Кол-во: {{ item.quantity }}</p>
+        <p>Цена за штуку: {{ item.price_at_time }} грн</p>
+        <p><strong>Итого:</strong> {{ item.quantity|multiply:item.price_at_time }} грн</p>
+      </div>
+    {% endfor %}
+
+    <hr>
+  </div>
+{% empty %}
+  <p>Вы ещё ничего не заказывали.</p>
+{% endfor %}
+
+{% endblock %}

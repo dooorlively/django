@@ -1,0 +1,12 @@
+{% load static %}
+<h2>Профиль пользователя</h2>
+<link rel="stylesheet" href="{% static 'style.css' %}">
+
+<div class="profile-card">
+  <p><strong>Имя пользователя:</strong> {{ request.user.username }}</p>
+  <p><strong>Роль:</strong> {{ request.user.role }}</p>
+  <p><strong>Дата регистрации:</strong> {{ request.user.date_joined }}</p>
+
+  <a href="{% url 'order_history' %}">Перейти к истории заказов</a>
+  <a href="{% url 'index' %}">Вернуться на главную</a>
+</div>
